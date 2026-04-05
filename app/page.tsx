@@ -1,17 +1,8 @@
-import type { Metadata } from 'next';
-import { LandingClient } from '@/components/LandingClient';
+import { redirect } from "next/navigation";
+import { routing } from "@/i18n/routing";
 
-export const metadata: Metadata = {
-  title: 'Respo Caravan | Compact Camping Trailers',
-  description:
-    'One camper. Different life scenarios. Respo Caravan — compact camping trailers for those who value freedom, comfort, and modern design.',
-  openGraph: {
-    title: 'Respo Caravan | Compact Camping Trailers',
-    description:
-      'One camper. Different life scenarios. Respo Caravan — compact camping trailers for freedom, comfort, and modern design.',
-  },
-};
-
-export default function LandingPage() {
-  return <LandingClient />;
+// Fallback redirect — middleware handles this at the edge,
+// but if middleware is bypassed this ensures users still land on the default locale.
+export default function RootPage() {
+  redirect(`/${routing.defaultLocale}`);
 }

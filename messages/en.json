@@ -1,0 +1,153 @@
+{
+  "nav": {
+    "types": "Camper Types",
+    "configurations": "Configurations",
+    "specs": "Specifications",
+    "advantages": "Advantages",
+    "options": "Additional Options"
+  },
+  "hero": {
+    "slogan": "One camper. Different life scenarios.",
+    "cta": "Request a Consultation"
+  },
+  "types": {
+    "title": "Choose your camper",
+    "wide": {
+      "name": "Camper Wide",
+      "feature1": "Spacious interior design",
+      "feature2": "Perfect for families",
+      "feature3": "Enhanced comfort",
+      "spec1": "800 kg (can be towed with category B license)",
+      "spec2": "Tires: 155R13",
+      "spec3": "Thermal insulation",
+      "spec4": "Wide stable base"
+    },
+    "offroad": {
+      "name": "Camper Off-Road",
+      "feature1": "All-terrain capability",
+      "feature2": "Rugged construction",
+      "feature3": "Adventure ready",
+      "spec1": "1350 kg",
+      "spec2": "Off-road tires: M/S 225/75 R15",
+      "spec3": "Thermal insulation",
+      "spec4": "Coil spring suspension (reduces vibration)"
+    },
+    "select": "Choose",
+    "selected": "Selected"
+  },
+  "config": {
+    "title": "Choose Configuration",
+    "subtitle": "Select a configuration to see detailed technical specifications",
+    "base": {
+      "name": "Base",
+      "feature1": "Essential equipment",
+      "feature2": "Compact design",
+      "feature3": "Great value"
+    },
+    "mid": {
+      "name": "Mid",
+      "feature1": "Enhanced comfort",
+      "feature2": "Additional features",
+      "feature3": "Best balance"
+    },
+    "performance": {
+      "name": "Performance",
+      "feature1": "Premium materials",
+      "feature2": "Full equipment",
+      "feature3": "Maximum comfort"
+    },
+    "basePrice": "From €8,500",
+    "order": "Order Now",
+    "selected": "Selected",
+    "popular": "Popular"
+  },
+  "specs": {
+    "title": "Technical Specifications",
+    "weight": "Weight",
+    "size": "Size",
+    "sleepingCapacity": "Sleeping capacity",
+    "groundClearance": "Ground clearance",
+    "axleType": "Axle type",
+    "batteryCapacity": "Battery capacity",
+    "waterTank": "Water tank",
+    "doorSize": "Door size",
+    "rearDoorSize": "Rear door size",
+    "maximumSpeed": "Maximum speed",
+    "persons": "{count} persons",
+    "torsion": "Torsion suspension",
+    "reinforcedTorsion": "Reinforced torsion suspension"
+  },
+  "cta": {
+    "title": "Start Your Adventure with Respo Caravan",
+    "subtitle": "Get a free consultation and personalized offer",
+    "button": "Request a Consultation"
+  },
+  "form": {
+    "title": "Pre-Order Details",
+    "name": "Full Name",
+    "phone": "Phone Number",
+    "email": "Email",
+    "message": "Message (optional)",
+    "submit": "Submit",
+    "success": "Thank you! We will contact you soon.",
+    "namePlaceholder": "Enter your name",
+    "phonePlaceholder": "+380",
+    "emailPlaceholder": "your@email.com",
+    "messagePlaceholder": "Tell us about your plans...",
+    "nameRequired": "Please enter your name",
+    "phoneRequired": "Please enter your phone number",
+    "emailRequired": "Please enter your email",
+    "emailInvalid": "Please enter a valid email"
+  },
+  "feedback": {
+    "callBack": "Request a Call Back"
+  },
+  "footer": {
+    "contacts": "Contacts",
+    "followUs": "Follow Us",
+    "legal": "Legal",
+    "privacy": "Privacy Policy",
+    "terms": "Terms of Service",
+    "copyright": "© 2026 Respo Caravan. All rights reserved.",
+    "description": "Compact camping trailers for those who value freedom, comfort, and modern design."
+  },
+  "advantages": {
+    "title": "Why Choose Respo Caravan",
+    "1": { "title": "Lightweight & Compact", "desc": "Easy to tow with any regular car" },
+    "2": { "title": "Modern Design", "desc": "Minimalist aesthetic with premium finish" },
+    "3": { "title": "Quick Setup", "desc": "Ready to use in minutes" },
+    "4": { "title": "All-Season Use", "desc": "Insulated for year-round comfort" },
+    "5": { "title": "Autonomous", "desc": "Independent power and water systems" },
+    "6": { "title": "Quality Materials", "desc": "Built to last with premium components" },
+    "7": { "title": "Easy Storage", "desc": "Compact size for convenient storage" },
+    "8": { "title": "Versatile", "desc": "Perfect for camping, travel, and shelter" }
+  },
+  "calculator": {
+    "title": "Price Calculator",
+    "additionalOptions": "Additional Options",
+    "exteriorOptions": "Exterior options",
+    "interiorOptions": "Interior options",
+    "summary": "Summary",
+    "trailerType": "Trailer type:",
+    "configuration": "Configuration:",
+    "basePrice": "Base price:",
+    "selectedOptions": "Selected options:",
+    "finalPrice": "Final price",
+    "getConsultation": "Get consultation",
+    "order": "Order",
+    "solar": "Solar panel",
+    "roof": "Roof rack",
+    "awning": "Awning",
+    "storage": "Storage box",
+    "bike": "Bike rack",
+    "kitchen": "Portable kitchen",
+    "heating": "Heating system",
+    "bed": "Bed extension",
+    "lighting": "Interior lighting",
+    "electric": "Electric system"
+  },
+  "metadata": {
+    "title": "Respo Caravan | Compact Camping Trailers",
+    "description": "One camper. Different life scenarios. Respo Caravan — compact camping trailers for those who value freedom, comfort, and modern design."
+  }
+}

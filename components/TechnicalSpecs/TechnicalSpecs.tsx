@@ -1,166 +1,180 @@
-'use client';
+import { getTranslations } from "next-intl/server";
+import { AnimatedHeading } from "@/components/Advantages/AnimatedHeading";
+import {
+  TechnicalSpecsToggle,
+  SpecsTableToggle,
+  SpecsBadges,
+} from "./TechnicalSpecsToggle";
 
-import { useLanguage } from '@/contexts/LanguageContext';
-import { motion, AnimatePresence } from 'motion/react';
-import type { TrailerType } from '@/components/TrailerTypes/TrailerTypes';
-import type { ConfigType } from '@/components/Configurations/Configurations';
+const trailerTypes = ["wide", "offroad"] as const;
+const configTypes = ["base", "mid", "performance"] as const;
 
-interface TechnicalSpecsProps {
-  trailerType: TrailerType;
-  configType: ConfigType;
-}
-
-export function TechnicalSpecs({ trailerType, configType }: TechnicalSpecsProps) {
-  const { t } = useLanguage();
-
-  if (!configType) return null;
-
-  const specsData: Record<string, Record<string, Record<string, string>>> = {
-    wide: {
-      base: {
-        Weight: '600 kg',
-        Size: '450 × 500 × 125 cm',
-        'Sleeping capacity': '2 persons',
-        'Ground clearance': '450 mm',
-        'Axle type': 'Torsion suspension',
-        'Battery capacity': '100 Ah',
-        'Water tank': '40 L',
-        'Door size': '870 × 720 mm',
-        'Rear door size': '1140 × 930 mm',
-        'Maximum speed': '140 km/h',
-      },
-      mid: {
-        Weight: '650 kg',
-        Size: '480 × 520 × 130 cm',
-        'Sleeping capacity': '3 persons',
-        'Ground clearance': '450 mm',
-        'Axle type': 'Torsion suspension',
-        'Battery capacity': '150 Ah',
-        'Water tank': '60 L',
-        'Door size': '870 × 720 mm',
-        'Rear door size': '1140 × 930 mm',
-        'Maximum speed': '140 km/h',
-      },
-      performance: {
-        Weight: '700 kg',
-        Size: '500 × 540 × 135 cm',
-        'Sleeping capacity': '4 persons',
-        'Ground clearance': '450 mm',
-        'Axle type': 'Reinforced torsion suspension',
-        'Battery capacity': '200 Ah',
-        'Water tank': '80 L',
-        'Door size': '870 × 720 mm',
-        'Rear door size': '1140 × 930 mm',
-        'Maximum speed': '140 km/h',
-      },
+const specsValues: Record<
+  string,
+  Record<string, Record<string, string | { key: string; count: number }>>
+> = {
+  wide: {
+    base: {
+      weight: "600 kg",
+      size: "450 × 500 × 125 cm",
+      sleepingCapacity: "2",
+      groundClearance: "450 mm",
+      axleType: "torsion",
+      batteryCapacity: "100 Ah",
+      waterTank: "40 L",
+      doorSize: "870 × 720 mm",
+      rearDoorSize: "1140 × 930 mm",
+      maximumSpeed: "140 km/h",
     },
-    offroad: {
-      base: {
-        Weight: '620 kg',
-        Size: '450 × 500 × 130 cm',
-        'Sleeping capacity': '2 persons',
-        'Ground clearance': '500 mm',
-        'Axle type': 'Reinforced torsion suspension',
-        'Battery capacity': '100 Ah',
-        'Water tank': '50 L',
-        'Door size': '870 × 720 mm',
-        'Rear door size': '1140 × 930 mm',
-        'Maximum speed': '140 km/h',
-      },
-      mid: {
-        Weight: '680 kg',
-        Size: '480 × 520 × 135 cm',
-        'Sleeping capacity': '3 persons',
-        'Ground clearance': '500 mm',
-        'Axle type': 'Reinforced torsion suspension',
-        'Battery capacity': '150 Ah',
-        'Water tank': '70 L',
-        'Door size': '870 × 720 mm',
-        'Rear door size': '1140 × 930 mm',
-        'Maximum speed': '140 km/h',
-      },
-      performance: {
-        Weight: '750 kg',
-        Size: '500 × 540 × 140 cm',
-        'Sleeping capacity': '4 persons',
-        'Ground clearance': '500 mm',
-        'Axle type': 'Reinforced torsion suspension',
-        'Battery capacity': '200 Ah',
-        'Water tank': '100 L',
-        'Door size': '870 × 720 mm',
-        'Rear door size': '1140 × 930 mm',
-        'Maximum speed': '140 km/h',
-      },
+    mid: {
+      weight: "650 kg",
+      size: "480 × 520 × 130 cm",
+      sleepingCapacity: "3",
+      groundClearance: "450 mm",
+      axleType: "torsion",
+      batteryCapacity: "150 Ah",
+      waterTank: "60 L",
+      doorSize: "870 × 720 mm",
+      rearDoorSize: "1140 × 930 mm",
+      maximumSpeed: "140 km/h",
     },
-  };
+    performance: {
+      weight: "700 kg",
+      size: "500 × 540 × 135 cm",
+      sleepingCapacity: "4",
+      groundClearance: "450 mm",
+      axleType: "reinforcedTorsion",
+      batteryCapacity: "200 Ah",
+      waterTank: "80 L",
+      doorSize: "870 × 720 mm",
+      rearDoorSize: "1140 × 930 mm",
+      maximumSpeed: "140 km/h",
+    },
+  },
+  offroad: {
+    base: {
+      weight: "620 kg",
+      size: "450 × 500 × 130 cm",
+      sleepingCapacity: "2",
+      groundClearance: "500 mm",
+      axleType: "reinforcedTorsion",
+      batteryCapacity: "100 Ah",
+      waterTank: "50 L",
+      doorSize: "870 × 720 mm",
+      rearDoorSize: "1140 × 930 mm",
+      maximumSpeed: "140 km/h",
+    },
+    mid: {
+      weight: "680 kg",
+      size: "480 × 520 × 135 cm",
+      sleepingCapacity: "3",
+      groundClearance: "500 mm",
+      axleType: "reinforcedTorsion",
+      batteryCapacity: "150 Ah",
+      waterTank: "70 L",
+      doorSize: "870 × 720 mm",
+      rearDoorSize: "1140 × 930 mm",
+      maximumSpeed: "140 km/h",
+    },
+    performance: {
+      weight: "750 kg",
+      size: "500 × 540 × 140 cm",
+      sleepingCapacity: "4",
+      groundClearance: "500 mm",
+      axleType: "reinforcedTorsion",
+      batteryCapacity: "200 Ah",
+      waterTank: "100 L",
+      doorSize: "870 × 720 mm",
+      rearDoorSize: "1140 × 930 mm",
+      maximumSpeed: "140 km/h",
+    },
+  },
+};
 
-  const specs = trailerType ? specsData[trailerType]?.[configType] : null;
-  if (!specs) return null;
+const specKeys = [
+  "weight",
+  "size",
+  "sleepingCapacity",
+  "groundClearance",
+  "axleType",
+  "batteryCapacity",
+  "waterTank",
+  "doorSize",
+  "rearDoorSize",
+  "maximumSpeed",
+] as const;
 
-  const specEntries = Object.entries(specs);
+export async function TechnicalSpecs() {
+  const t = await getTranslations("specs");
 
   return (
-    <AnimatePresence mode="wait">
-      <motion.section
-        key={`${trailerType}-${configType}`}
-        id="specs"
-        initial={{ opacity: 0, y: 30 }}
-        animate={{ opacity: 1, y: 0 }}
-        exit={{ opacity: 0, y: -30 }}
-        transition={{ duration: 0.6, ease: 'easeOut' }}
-        className="py-12 px-4 bg-white"
-      >
+    <TechnicalSpecsToggle>
+      <section id="specs" className="py-12 px-4 bg-white">
         <div className="max-w-5xl mx-auto">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.2, duration: 0.5 }}
-            className="text-center mb-10"
-          >
-            <h2 className="text-3xl md:text-4xl font-bold mb-3 text-black">{t('specs.title')}</h2>
-            <div className="w-20 h-0.5 mx-auto mb-4" style={{ backgroundColor: '#FF5A2F' }} />
-            <div className="flex items-center justify-center gap-3 mt-6">
-              <div
-                className="px-6 py-3 rounded-lg font-semibold text-white shadow-md"
-                style={{ backgroundColor: '#FF5A2F' }}
-              >
-                {trailerType === 'wide' ? 'Camper Wide' : 'Camper Off-Road'}
-              </div>
-              <span className="text-2xl text-gray-400">•</span>
-              <div
-                className="px-6 py-3 rounded-lg font-semibold text-white shadow-md"
-                style={{ backgroundColor: '#FF5A2F' }}
-              >
-                {configType.charAt(0).toUpperCase() + configType.slice(1)}
-              </div>
-            </div>
-          </motion.div>
+          <AnimatedHeading>
+            <h2 className="text-3xl md:text-4xl font-bold mb-3 text-black">
+              {t("title")}
+            </h2>
+            <div
+              className="w-20 h-0.5 mx-auto mb-4"
+              style={{ backgroundColor: "#FF5A2F" }}
+            />
+            <SpecsBadges />
+          </AnimatedHeading>
 
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.3, duration: 0.5 }}
-            className="max-w-3xl mx-auto"
-          >
-            <div className="bg-white border border-gray-200 rounded-lg overflow-hidden shadow-sm">
-              {specEntries.map(([key, value], index) => (
-                <motion.div
-                  key={key}
-                  initial={{ opacity: 0, x: -20 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ delay: 0.4 + index * 0.05, duration: 0.4 }}
-                  className="grid grid-cols-2 gap-6 py-4 px-6 border-b border-gray-200 last:border-b-0 hover:bg-gray-50 transition-colors"
-                >
-                  <span className="text-gray-600 text-base">{key}</span>
-                  <span className="font-bold text-lg text-right" style={{ color: '#FF5A2F' }}>
-                    {value}
-                  </span>
-                </motion.div>
-              ))}
-            </div>
-          </motion.div>
+          <div className="max-w-3xl mx-auto">
+            {trailerTypes.map((trailer) =>
+              configTypes.map((config) => {
+                const data = specsValues[trailer][config];
+                return (
+                  <SpecsTableToggle
+                    key={`${trailer}-${config}`}
+                    trailerType={trailer}
+                    configType={config}
+                  >
+                    <div className="bg-white border border-gray-200 rounded-lg overflow-hidden shadow-sm">
+                      {specKeys.map((specKey) => {
+                        const rawValue = data[specKey] as string;
+                        let displayValue: string;
+                        if (specKey === "sleepingCapacity") {
+                          displayValue = t("persons", {
+                            count: parseInt(rawValue),
+                          });
+                        } else if (
+                          specKey === "axleType" &&
+                          (rawValue === "torsion" ||
+                            rawValue === "reinforcedTorsion")
+                        ) {
+                          displayValue = t(rawValue);
+                        } else {
+                          displayValue = rawValue;
+                        }
+
+                        return (
+                          <div
+                            key={specKey}
+                            className="grid grid-cols-2 gap-6 py-4 px-6 border-b border-gray-200 last:border-b-0 hover:bg-gray-50 transition-colors"
+                          >
+                            <span className="text-gray-600 text-base">
+                              {t(specKey)}
+                            </span>
+                            <span
+                              className="font-bold text-lg text-right"
+                              style={{ color: "#FF5A2F" }}
+                            >
+                              {displayValue}
+                            </span>
+                          </div>
+                        );
+                      })}
+                    </div>
+                  </SpecsTableToggle>
+                );
+              }),
+            )}
+          </div>
         </div>
-      </motion.section>
-    </AnimatePresence>
+      </section>
+    </TechnicalSpecsToggle>
   );
 }
