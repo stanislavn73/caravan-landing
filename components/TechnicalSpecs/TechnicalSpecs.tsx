@@ -106,6 +106,8 @@ const specKeys = [
 
 export async function TechnicalSpecs() {
   const t = await getTranslations("specs");
+  const tTypes = await getTranslations("types");
+  const tConfig = await getTranslations("config");
 
   return (
     <TechnicalSpecsToggle>
@@ -119,7 +121,17 @@ export async function TechnicalSpecs() {
               className="w-20 h-0.5 mx-auto mb-4"
               style={{ backgroundColor: "#FF5A2F" }}
             />
-            <SpecsBadges />
+            <SpecsBadges
+              trailerNames={{
+                wide: tTypes("wide.name"),
+                offroad: tTypes("offroad.name"),
+              }}
+              configNames={{
+                base: tConfig("base.name"),
+                mid: tConfig("mid.name"),
+                performance: tConfig("performance.name"),
+              }}
+            />
           </AnimatedHeading>
 
           <div className="max-w-3xl mx-auto">

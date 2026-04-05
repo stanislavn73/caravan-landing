@@ -12,8 +12,6 @@ export function TechnicalSpecsToggle({ children }: { children: ReactNode }) {
     setHydrated(true);
   }, []);
 
-  // Before hydration: render everything visible (server HTML for crawlers)
-  // After hydration: hide section when no config selected
   const shouldHide = hydrated && !selectedConfig;
 
   return (
@@ -39,8 +37,6 @@ export function SpecsTableToggle({
     setHydrated(true);
   }, []);
 
-  // Before hydration: all tables visible (server HTML for crawlers)
-  // After hydration: only show matching table
   const isActive =
     selectedTrailerType === trailerType && selectedConfig === configType;
   const shouldHide = hydrated && !isActive;
@@ -56,10 +52,20 @@ export function SpecsTableToggle({
   );
 }
 
-export function SpecsBadges() {
+interface SpecsBadgesProps {
+  trailerNames: { wide: string; offroad: string };
+  configNames: { base: string; mid: string; performance: string };
+}
+
+export function SpecsBadges({ trailerNames, configNames }: SpecsBadgesProps) {
   const { selectedTrailerType, selectedConfig } = useConfigurator();
 
   if (!selectedConfig) return null;
+
+  const trailerLabel =
+    selectedTrailerType === "wide" ? trailerNames.wide : trailerNames.offroad;
+  const configLabel =
+    configNames[selectedConfig as keyof typeof configNames] ?? selectedConfig;
 
   return (
     <div className="flex items-center justify-center gap-3 mt-6">
@@ -67,14 +73,16 @@ export function SpecsBadges() {
         className="px-6 py-3 rounded-lg font-semibold text-white shadow-md"
         style={{ backgroundColor: "#FF5A2F" }}
       >
-        {selectedTrailerType === "wide" ? "Camper Wide" : "Camper Off-Road"}
+        {trailerLabel}
       </div>
-      <span className="text-2xl text-gray-400">•</span>
+      <span className="text-2xl text-gray-400" aria-hidden="true">
+        &bull;
+      </span>
       <div
         className="px-6 py-3 rounded-lg font-semibold text-white shadow-md"
         style={{ backgroundColor: "#FF5A2F" }}
       >
-        {selectedConfig.charAt(0).toUpperCase() + selectedConfig.slice(1)}
+        {configLabel}
       </div>
     </div>
   );

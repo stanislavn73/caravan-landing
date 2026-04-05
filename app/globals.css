@@ -66,3 +66,29 @@ body {
 .ant-checkbox:hover .ant-checkbox-inner {
   border-color: #FF5A2F !important;
 }
+
+/* Focus-visible styles for keyboard navigation */
+:focus-visible {
+  outline: 2px solid #FF5A2F;
+  outline-offset: 2px;
+}
+
+button:focus-visible,
+a:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible {
+  outline: 2px solid #FF5A2F;
+  outline-offset: 2px;
+}
+
+/* Respect reduced-motion preference */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+

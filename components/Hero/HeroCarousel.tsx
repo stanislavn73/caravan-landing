@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import Image from "next/image";
 import { motion, AnimatePresence } from "motion/react";
 
@@ -12,18 +12,28 @@ interface HeroImage {
 
 export function HeroCarousel({ images }: { images: HeroImage[] }) {
   const [currentSlide, setCurrentSlide] = useState(0);
+  const [paused, setPaused] = useState(false);
+
+  const nextSlide = useCallback(() => {
+    setCurrentSlide((prev) => (prev + 1) % images.length);
+  }, [images.length]);
 
   useEffect(() => {
-    const timer = setInterval(() => {
-      setCurrentSlide((prev) => (prev + 1) % images.length);
-    }, 5000);
+    if (paused) return;
+    const timer = setInterval(nextSlide, 5000);
     return () => clearInterval(timer);
-  }, [images.length]);
+  }, [paused, nextSlide]);
 
   const currentImage = images[currentSlide];
 
   return (
-    <>
+    <div
+      onMouseEnter={() => setPaused(true)}
+      onMouseLeave={() => setPaused(false)}
+      onFocus={() => setPaused(true)}
+      onBlur={() => setPaused(false)}
+      className="absolute inset-0"
+    >
       <AnimatePresence mode="wait">
         <motion.div
           key={currentSlide}
@@ -48,21 +58,31 @@ export function HeroCarousel({ images }: { images: HeroImage[] }) {
         </motion.div>
       </AnimatePresence>
 
-      <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-20 flex space-x-3">
+      <div
+        className="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-20 flex space-x-2"
+        role="tablist"
+        aria-label="Hero slideshow"
+      >
         {images.map((_, index) => (
           <button
             key={index}
+            role="tab"
+            aria-selected={currentSlide === index}
             onClick={() => setCurrentSlide(index)}
-            className="w-3 h-3 rounded-full transition-all duration-300"
-            style={{
-              backgroundColor:
-                currentSlide === index
-                  ? "#FF5A2F"
-                  : "rgba(255, 255, 255, 0.5)",
-              transform: currentSlide === index ? "scale(1.3)" : "scale(1)",
-            }}
+            className="w-11 h-11 rounded-full flex items-center justify-center"
             aria-label={`Go to slide ${index + 1}`}
-          />
+          >
+            <span
+              className="block w-3 h-3 rounded-full transition-all duration-300"
+              style={{
+                backgroundColor:
+                  currentSlide === index
+                    ? "#FF5A2F"
+                    : "rgba(255, 255, 255, 0.5)",
+                transform: currentSlide === index ? "scale(1.3)" : "scale(1)",
+              }}
+            />
+          </button>
         ))}
       </div>
 
@@ -71,6 +91,7 @@ export function HeroCarousel({ images }: { images: HeroImage[] }) {
         animate={{ opacity: 1 }}
         transition={{ delay: 1.5, duration: 0.8 }}
         className="absolute bottom-24 left-1/2 transform -translate-x-1/2"
+        aria-hidden="true"
       >
         <motion.div
           animate={{ y: [0, 10, 0] }}
@@ -84,6 +105,6 @@ export function HeroCarousel({ images }: { images: HeroImage[] }) {
           />
         </motion.div>
       </motion.div>
-    </>
+    </div>
   );
 }

@@ -107,6 +107,7 @@ export function NavbarClient({ menuItems, locale }: NavbarClientProps) {
               </Button>
               <div
                 className={`h-6 md:h-8 w-px ${isSticky ? "bg-white/30" : "bg-gray-300 md:bg-white/30"} hidden sm:block`}
+                aria-hidden="true"
               />
               <motion.div
                 whileHover={{ scale: 1.05 }}
@@ -186,6 +187,7 @@ export function NavbarClient({ menuItems, locale }: NavbarClientProps) {
                   />
                 }
                 onClick={() => setMobileMenuOpen(true)}
+                aria-label="Open menu"
                 className="flex items-center justify-center w-12 h-12 hover:bg-orange-50/50 active:bg-orange-100/50 transition-all duration-200 rounded-lg"
               />
             </motion.div>
@@ -212,7 +214,7 @@ export function NavbarClient({ menuItems, locale }: NavbarClientProps) {
           body: { padding: "24px 16px" },
           wrapper: { width: "85%" },
         }}
-        closeIcon={<span className="text-2xl">&times;</span>}
+        closeIcon={<span className="text-2xl" aria-label="Close menu">&times;</span>}
       >
         <motion.div
           initial={{ opacity: 0, x: 20 }}

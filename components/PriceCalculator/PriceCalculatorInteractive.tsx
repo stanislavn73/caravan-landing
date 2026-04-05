@@ -46,6 +46,11 @@ interface Labels {
   finalPrice: string;
   getConsultation: string;
   order: string;
+  camperWide: string;
+  camperOffroad: string;
+  configBase: string;
+  configMid: string;
+  configPerformance: string;
 }
 
 export function PriceCalculatorToggle({ children }: { children: ReactNode }) {
@@ -101,13 +106,13 @@ export function PriceCalculatorInteractive({
   );
 
   const trailerTypeName =
-    activeTrailer === "wide" ? "Camper Wide" : "Camper Off-Road";
+    activeTrailer === "wide" ? labels.camperWide : labels.camperOffroad;
   const configName =
     activeConfig === "base"
-      ? "Base"
+      ? labels.configBase
       : activeConfig === "mid"
-        ? "Mid"
-        : "Performance";
+        ? labels.configMid
+        : labels.configPerformance;
 
   return (
     <section id="calculator" className="py-12 px-4 bg-gray-50">
@@ -154,7 +159,7 @@ export function PriceCalculatorInteractive({
                         >
                           <span className="text-base">{option.name}</span>
                         </Checkbox>
-                        <span className="font-medium text-gray-500 ml-4">
+                        <span className="font-medium text-gray-600 ml-4">
                           + {option.price.toLocaleString()} ₴
                         </span>
                       </motion.div>
@@ -182,7 +187,7 @@ export function PriceCalculatorInteractive({
                         >
                           <span className="text-base">{option.name}</span>
                         </Checkbox>
-                        <span className="font-medium text-gray-500 ml-4">
+                        <span className="font-medium text-gray-600 ml-4">
                           + {option.price.toLocaleString()} ₴
                         </span>
                       </motion.div>

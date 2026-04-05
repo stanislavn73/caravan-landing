@@ -49,13 +49,13 @@ export async function Footer() {
             <SocialIcons />
             <div className="mt-4 space-y-1">
               <a
-                href="#"
+                href="/privacy"
                 className="block text-gray-400 hover:text-white transition-colors text-sm"
               >
                 {t("privacy")}
               </a>
               <a
-                href="#"
+                href="/terms"
                 className="block text-gray-400 hover:text-white transition-colors text-sm"
               >
                 {t("terms")}

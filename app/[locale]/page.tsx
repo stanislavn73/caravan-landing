@@ -93,14 +93,22 @@ export default async function Page({ params }: Props) {
       />
       <ConsultationFormProvider>
         <ConfiguratorProvider>
+          <a
+            href="#main-content"
+            className="sr-only focus:not-sr-only focus:fixed focus:top-0 focus:left-0 focus:z-[999] focus:px-6 focus:py-4 focus:bg-[#FF5A2F] focus:text-white focus:font-semibold focus:no-underline"
+          >
+            Skip to content
+          </a>
           <div className="min-h-screen bg-white">
             <Navbar />
+            <main id="main-content">
             <Hero />
             <InteractiveConfigurator />
             <TechnicalSpecs />
             <Advantages />
             <PriceCalculator />
             <CTASection />
+            </main>
             <Footer />
             <FloatingFeedbackButton />
             <ConsultationForm />

@@ -6,6 +6,8 @@ import {
 
 export async function PriceCalculator() {
   const t = await getTranslations("calculator");
+  const tTypes = await getTranslations("types");
+  const tConfig = await getTranslations("config");
 
   const labels = {
     title: t("title"),
@@ -20,6 +22,11 @@ export async function PriceCalculator() {
     finalPrice: t("finalPrice"),
     getConsultation: t("getConsultation"),
     order: t("order"),
+    camperWide: tTypes("wide.name"),
+    camperOffroad: tTypes("offroad.name"),
+    configBase: tConfig("base.name"),
+    configMid: tConfig("mid.name"),
+    configPerformance: tConfig("performance.name"),
   };
 
   const optionNames = {
