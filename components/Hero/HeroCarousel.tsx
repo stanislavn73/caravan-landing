@@ -13,9 +13,22 @@ interface HeroImage {
 export function HeroCarousel({ images }: { images: HeroImage[] }) {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [paused, setPaused] = useState(false);
+  const [loadedSlides, setLoadedSlides] = useState<Set<number>>(
+    () => new Set([0]),
+  );
 
   const nextSlide = useCallback(() => {
-    setCurrentSlide((prev) => (prev + 1) % images.length);
+    setCurrentSlide((prev) => {
+      const next = (prev + 1) % images.length;
+      // Pre-load the slide after next
+      setLoadedSlides((loaded) => {
+        const updated = new Set(loaded);
+        updated.add(next);
+        updated.add((next + 1) % images.length);
+        return updated;
+      });
+      return next;
+    });
   }, [images.length]);
 
   useEffect(() => {
@@ -23,6 +36,25 @@ export function HeroCarousel({ images }: { images: HeroImage[] }) {
     const timer = setInterval(nextSlide, 5000);
     return () => clearInterval(timer);
   }, [paused, nextSlide]);
+
+  // Preload next slide after mount
+  useEffect(() => {
+    setLoadedSlides((loaded) => {
+      const updated = new Set(loaded);
+      updated.add(1);
+      return updated;
+    });
+  }, []);
+
+  const goToSlide = (index: number) => {
+    setLoadedSlides((loaded) => {
+      const updated = new Set(loaded);
+      updated.add(index);
+      updated.add((index + 1) % images.length);
+      return updated;
+    });
+    setCurrentSlide(index);
+  };
 
   const currentImage = images[currentSlide];
 
@@ -49,7 +81,7 @@ export function HeroCarousel({ images }: { images: HeroImage[] }) {
             fill
             className="object-cover"
             sizes="100vw"
-            priority
+            priority={currentSlide === 0}
             quality={75}
             placeholder="blur"
             blurDataURL={currentImage.blurDataURL}
@@ -57,6 +89,18 @@ export function HeroCarousel({ images }: { images: HeroImage[] }) {
           <div className="absolute inset-0 bg-black/50" />
         </motion.div>
       </AnimatePresence>
+
+      {/* Preload upcoming slides (hidden) */}
+      {images.map((img, i) =>
+        i !== currentSlide && loadedSlides.has(i) ? (
+          <link
+            key={img.src}
+            rel="preload"
+            as="image"
+            href={img.src}
+          />
+        ) : null,
+      )}
 
       <div
         className="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-20 flex space-x-2"
@@ -68,7 +112,7 @@ export function HeroCarousel({ images }: { images: HeroImage[] }) {
             key={index}
             role="tab"
             aria-selected={currentSlide === index}
-            onClick={() => setCurrentSlide(index)}
+            onClick={() => goToSlide(index)}
             className="w-11 h-11 rounded-full flex items-center justify-center"
             aria-label={`Go to slide ${index + 1}`}
           >
