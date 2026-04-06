@@ -1,4 +1,3 @@
-import { Row, Col } from "antd";
 import { getTranslations } from "next-intl/server";
 import * as motion from "motion/react-client";
 import { TrailerTypeCard } from "./TrailerTypeCard";
@@ -55,28 +54,27 @@ export async function TrailerTypes() {
           />
         </motion.div>
 
-        <Row gutter={[24, 24]}>
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
           {trailers.map((trailer, index) => (
-            <Col xs={24} lg={12} key={trailer.type}>
-              <motion.div
-                initial={{ opacity: 0, y: 50 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: index * 0.2, duration: 0.6 }}
-              >
-                <TrailerTypeCard
-                  type={trailer.type}
-                  name={trailer.name}
-                  image={trailer.image}
-                  blurDataURL={trailer.blurDataURL}
-                  specs={trailer.specs}
-                  selectLabel={t("select")}
-                  selectedLabel={t("selected")}
-                />
-              </motion.div>
-            </Col>
+            <motion.div
+              key={trailer.type}
+              initial={{ opacity: 0, y: 50 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: index * 0.2, duration: 0.6 }}
+            >
+              <TrailerTypeCard
+                type={trailer.type}
+                name={trailer.name}
+                image={trailer.image}
+                blurDataURL={trailer.blurDataURL}
+                specs={trailer.specs}
+                selectLabel={t("select")}
+                selectedLabel={t("selected")}
+              />
+            </motion.div>
           ))}
-        </Row>
+        </div>
       </div>
     </section>
   );

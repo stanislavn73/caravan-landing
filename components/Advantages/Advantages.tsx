@@ -1,4 +1,3 @@
-import { Row, Col, Card } from "antd";
 import { getTranslations } from "next-intl/server";
 import { AdvantageCard } from "./AdvantageCard";
 import { AdvantageIcon } from "./AdvantageIcon";
@@ -29,42 +28,30 @@ export async function Advantages() {
           />
         </AnimatedHeading>
 
-        <Row gutter={[24, 32]}>
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
           {advantages.map((advantage, index) => (
-            <Col xs={24} sm={12} lg={6} key={index} style={{ display: "flex" }}>
-              <AdvantageCard index={index}>
-                <Card
-                  hoverable
-                  className="transition-all duration-300 hover:shadow-lg"
-                  style={{
-                    borderColor: "#e5e7eb",
-                    flex: 1,
-                    display: "flex",
-                    flexDirection: "column",
-                  }}
-                  styles={{
-                    body: { flex: 1, display: "flex", flexDirection: "column" },
-                  }}
-                >
-                  <div className="text-center flex flex-col h-full">
-                    <div
-                      className="w-16 h-16 mx-auto mb-4 rounded-full flex items-center justify-center"
-                      style={{ backgroundColor: "#FF5A2F", color: "#ffffff" }}
-                    >
-                      <AdvantageIcon index={index} />
-                    </div>
-                    <h3 className="text-lg font-bold mb-2 text-black">
-                      {advantage.title}
-                    </h3>
-                    <p className="text-gray-500 text-sm flex-1">
-                      {advantage.description}
-                    </p>
+            <AdvantageCard index={index} key={index}>
+              <div
+                className="h-full rounded-lg border border-gray-200 bg-white hover:shadow-lg transition-all duration-300 cursor-pointer"
+              >
+                <div className="p-6 text-center flex flex-col h-full">
+                  <div
+                    className="w-16 h-16 mx-auto mb-4 rounded-full flex items-center justify-center"
+                    style={{ backgroundColor: "#FF5A2F", color: "#ffffff" }}
+                  >
+                    <AdvantageIcon index={index} />
                   </div>
-                </Card>
-              </AdvantageCard>
-            </Col>
+                  <h3 className="text-lg font-bold mb-2 text-black">
+                    {advantage.title}
+                  </h3>
+                  <p className="text-gray-500 text-sm flex-1">
+                    {advantage.description}
+                  </p>
+                </div>
+              </div>
+            </AdvantageCard>
           ))}
-        </Row>
+        </div>
       </div>
     </section>
   );

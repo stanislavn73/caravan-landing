@@ -1,11 +1,11 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { Card, Checkbox, Row, Col, Button, Divider } from "antd";
 import { motion } from "motion/react";
 import { useConfigurator } from "@/components/ConfiguratorContext";
 import { useConsultationForm } from "@/components/ConsultationFormContext";
 import { AnimatedHeading } from "@/components/Advantages/AnimatedHeading";
+import { Button } from "@/components/ui/Button";
 import type { ReactNode } from "react";
 
 interface OptionDef {
@@ -65,6 +65,38 @@ export function PriceCalculatorToggle({ children }: { children: ReactNode }) {
 
   return (
     <div style={shouldHide ? { display: "none" } : undefined}>{children}</div>
+  );
+}
+
+function OptionCheckbox({
+  checked,
+  onChange,
+  label,
+  price,
+}: {
+  checked: boolean;
+  onChange: (checked: boolean) => void;
+  label: string;
+  price: number;
+}) {
+  return (
+    <motion.div
+      whileHover={{ x: 3 }}
+      className="flex items-center justify-between py-3 border-b border-gray-100 last:border-b-0"
+    >
+      <label className="flex items-center gap-3 flex-1 cursor-pointer">
+        <input
+          type="checkbox"
+          checked={checked}
+          onChange={(e) => onChange(e.target.checked)}
+          className="w-4 h-4 rounded accent-[#FF5A2F]"
+        />
+        <span className="text-base">{label}</span>
+      </label>
+      <span className="font-medium text-gray-600 ml-4">
+        + {price.toLocaleString()} ₴
+      </span>
+    </motion.div>
   );
 }
 
@@ -133,82 +165,57 @@ export function PriceCalculatorInteractive({
           viewport={{ once: true }}
           transition={{ delay: 0.2, duration: 0.6 }}
         >
-          <Row gutter={[32, 32]}>
-            <Col xs={24} lg={14}>
-              <Card className="shadow-lg h-full">
-                <h3 className="text-2xl font-bold mb-6">
-                  {labels.additionalOptions}
-                </h3>
-                <div className="mb-8">
-                  <h4 className="text-lg font-semibold mb-4 text-gray-600">
-                    {labels.exteriorOptions}
-                  </h4>
-                  <div className="space-y-3">
-                    {exteriorOptions.map((option) => (
-                      <motion.div
-                        key={option.id}
-                        whileHover={{ x: 3 }}
-                        className="flex items-center justify-between py-3 border-b border-gray-100 last:border-b-0"
-                      >
-                        <Checkbox
-                          checked={selectedOptions.includes(option.id)}
-                          onChange={(e) =>
-                            handleOptionChange(option.id, e.target.checked)
-                          }
-                          className="flex-1"
-                        >
-                          <span className="text-base">{option.name}</span>
-                        </Checkbox>
-                        <span className="font-medium text-gray-600 ml-4">
-                          + {option.price.toLocaleString()} ₴
-                        </span>
-                      </motion.div>
-                    ))}
-                  </div>
+          <div className="grid grid-cols-1 lg:grid-cols-[1fr_auto] gap-8">
+            <div className="rounded-lg border border-gray-200 bg-white shadow-lg p-6">
+              <h3 className="text-2xl font-bold mb-6">
+                {labels.additionalOptions}
+              </h3>
+              <div className="mb-8">
+                <h4 className="text-lg font-semibold mb-4 text-gray-600">
+                  {labels.exteriorOptions}
+                </h4>
+                <div className="space-y-0">
+                  {exteriorOptions.map((option) => (
+                    <OptionCheckbox
+                      key={option.id}
+                      checked={selectedOptions.includes(option.id)}
+                      onChange={(checked) =>
+                        handleOptionChange(option.id, checked)
+                      }
+                      label={option.name}
+                      price={option.price}
+                    />
+                  ))}
                 </div>
-                <Divider className="my-6" />
-                <div>
-                  <h4 className="text-lg font-semibold mb-4 text-gray-600">
-                    {labels.interiorOptions}
-                  </h4>
-                  <div className="space-y-3">
-                    {interiorOptions.map((option) => (
-                      <motion.div
-                        key={option.id}
-                        whileHover={{ x: 3 }}
-                        className="flex items-center justify-between py-3 border-b border-gray-100 last:border-b-0"
-                      >
-                        <Checkbox
-                          checked={selectedOptions.includes(option.id)}
-                          onChange={(e) =>
-                            handleOptionChange(option.id, e.target.checked)
-                          }
-                          className="flex-1"
-                        >
-                          <span className="text-base">{option.name}</span>
-                        </Checkbox>
-                        <span className="font-medium text-gray-600 ml-4">
-                          + {option.price.toLocaleString()} ₴
-                        </span>
-                      </motion.div>
-                    ))}
-                  </div>
+              </div>
+              <hr className="my-6 border-gray-200" />
+              <div>
+                <h4 className="text-lg font-semibold mb-4 text-gray-600">
+                  {labels.interiorOptions}
+                </h4>
+                <div className="space-y-0">
+                  {interiorOptions.map((option) => (
+                    <OptionCheckbox
+                      key={option.id}
+                      checked={selectedOptions.includes(option.id)}
+                      onChange={(checked) =>
+                        handleOptionChange(option.id, checked)
+                      }
+                      label={option.name}
+                      price={option.price}
+                    />
+                  ))}
                 </div>
-                <div className="mt-8">
-                  <Button
-                    size="large"
-                    block
-                    onClick={openForm}
-                    className="h-12"
-                  >
-                    {labels.getConsultation}
-                  </Button>
-                </div>
-              </Card>
-            </Col>
-            <Col xs={24} lg={10}>
-              <Card
-                className="shadow-lg h-full"
+              </div>
+              <div className="mt-8">
+                <Button variant="default" size="lg" block onClick={openForm}>
+                  {labels.getConsultation}
+                </Button>
+              </div>
+            </div>
+            <div className="lg:w-[400px]">
+              <div
+                className="rounded-lg border border-gray-200 shadow-lg p-6 h-full"
                 style={{ backgroundColor: "#f9fafb" }}
               >
                 <h3 className="text-2xl font-bold mb-6">{labels.summary}</h3>
@@ -252,7 +259,7 @@ export function PriceCalculatorInteractive({
                     </div>
                   </div>
                 )}
-                <Divider className="my-6" />
+                <hr className="my-6 border-gray-200" />
                 <motion.div
                   key={totalPrice}
                   initial={{ scale: 1.05 }}
@@ -273,22 +280,17 @@ export function PriceCalculatorInteractive({
                   </div>
                 </motion.div>
                 <Button
-                  type="default"
-                  size="large"
+                  variant="dark"
+                  size="lg"
                   block
                   onClick={openForm}
-                  className="h-14 text-lg font-semibold shadow-lg hover:shadow-xl transition-all duration-300"
-                  style={{
-                    backgroundColor: "#6b7280",
-                    color: "white",
-                    borderColor: "#6b7280",
-                  }}
+                  className="h-14 text-lg bg-gray-500 border-gray-500 shadow-lg hover:shadow-xl"
                 >
                   {labels.order}
                 </Button>
-              </Card>
-            </Col>
-          </Row>
+              </div>
+            </div>
+          </div>
         </motion.div>
       </div>
     </section>

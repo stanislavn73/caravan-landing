@@ -1,4 +1,3 @@
-import { Row, Col } from "antd";
 import { getTranslations } from "next-intl/server";
 import * as motion from "motion/react-client";
 import Image from "next/image";
@@ -76,33 +75,32 @@ export async function Configurations() {
           />
         </motion.div>
 
-        <Row gutter={[24, 24]}>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {configs.map((config, index) => (
-            <Col xs={24} md={12} lg={8} key={config.type}>
-              <motion.div
-                initial={{ opacity: 0, y: 50 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: index * 0.15, duration: 0.6 }}
-                className="h-full"
-              >
-                <ConfigurationCard
-                  type={config.type}
-                  name={config.name}
-                  image={config.image}
-                  blurDataURL={config.blurDataURL}
-                  price={config.price}
-                  features={config.features}
-                  popular={config.popular}
-                  popularLabel={t("popular")}
-                  selectLabel={tTypes("select")}
-                  selectedLabel={t("selected")}
-                  orderLabel={t("order")}
-                />
-              </motion.div>
-            </Col>
+            <motion.div
+              key={config.type}
+              initial={{ opacity: 0, y: 50 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: index * 0.15, duration: 0.6 }}
+              className="h-full"
+            >
+              <ConfigurationCard
+                type={config.type}
+                name={config.name}
+                image={config.image}
+                blurDataURL={config.blurDataURL}
+                price={config.price}
+                features={config.features}
+                popular={config.popular}
+                popularLabel={t("popular")}
+                selectLabel={tTypes("select")}
+                selectedLabel={t("selected")}
+                orderLabel={t("order")}
+              />
+            </motion.div>
           ))}
-        </Row>
+        </div>
       </div>
     </section>
   );

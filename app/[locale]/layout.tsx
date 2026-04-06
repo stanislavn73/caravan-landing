@@ -2,8 +2,6 @@ import type { Metadata, Viewport } from "next";
 import { notFound } from "next/navigation";
 import { NextIntlClientProvider } from "next-intl";
 import { getTranslations, setRequestLocale } from "next-intl/server";
-import { AntdRegistry } from "@ant-design/nextjs-registry";
-import { AntdConfigProvider } from "@/components/AntdConfigProvider";
 import { Toaster } from "sonner";
 import { routing } from "@/i18n/routing";
 import "../globals.css";
@@ -69,14 +67,10 @@ export default async function LocaleLayout({ children, params }: Props) {
   return (
     <html lang={locale === "ua" ? "uk" : locale}>
       <body>
-        <AntdRegistry>
-          <AntdConfigProvider>
-            <NextIntlClientProvider locale={locale} messages={messages}>
-              {children}
-              <Toaster position="top-center" richColors />
-            </NextIntlClientProvider>
-          </AntdConfigProvider>
-        </AntdRegistry>
+        <NextIntlClientProvider locale={locale} messages={messages}>
+          {children}
+          <Toaster position="top-center" richColors />
+        </NextIntlClientProvider>
       </body>
     </html>
   );

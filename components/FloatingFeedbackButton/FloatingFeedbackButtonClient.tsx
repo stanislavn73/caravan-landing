@@ -1,9 +1,9 @@
 "use client";
 
-import { Button } from "antd";
 import { PhoneOutlined } from "@ant-design/icons";
 import { motion } from "motion/react";
 import { useConsultationForm } from "@/components/ConsultationFormContext";
+import { Button } from "@/components/ui/Button";
 
 export function FloatingFeedbackButtonClient({ label }: { label: string }) {
   const { openForm } = useConsultationForm();
@@ -21,17 +21,11 @@ export function FloatingFeedbackButtonClient({ label }: { label: string }) {
         className="relative"
       >
         <Button
-          type="primary"
-          size="large"
-          icon={<PhoneOutlined className="text-xl" />}
+          variant="primary"
           onClick={openForm}
-          className="h-14 px-20 shadow-2xl hover:shadow-[#FF5A2F]/50 transition-all duration-300 font-semibold"
-          style={{
-            backgroundColor: "#FF5A2F",
-            border: "none",
-            borderRadius: "100px",
-          }}
+          className="h-14 px-20 rounded-full shadow-2xl hover:shadow-[#FF5A2F]/50"
         >
+          <PhoneOutlined className="text-xl" />
           {label}
         </Button>
         <motion.div

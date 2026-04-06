@@ -1,10 +1,9 @@
 import Image from "next/image";
-import { Row, Col } from "antd";
 import { getTranslations } from "next-intl/server";
 import {
-  PhoneIcon,
-  MailIcon,
-  LocationIcon,
+  FooterPhoneIcon as PhoneIcon,
+  FooterMailIcon as MailIcon,
+  FooterLocationIcon as LocationIcon,
   SocialIcons,
 } from "./FooterIcons";
 
@@ -14,8 +13,8 @@ export async function Footer() {
   return (
     <footer className="bg-black text-white py-12 px-4">
       <div className="max-w-6xl mx-auto">
-        <Row gutter={[32, 32]}>
-          <Col xs={24} md={8}>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div>
             <div className="mb-4 relative h-20 w-40">
               <Image
                 src="/images/respo-logo.webp"
@@ -26,8 +25,8 @@ export async function Footer() {
               />
             </div>
             <p className="text-gray-400 text-sm mb-4">{t("description")}</p>
-          </Col>
-          <Col xs={24} md={8}>
+          </div>
+          <div>
             <h4 className="text-lg font-bold mb-3">{t("contacts")}</h4>
             <div className="space-y-2">
               <div className="flex items-center text-gray-400 hover:text-white transition-colors text-sm">
@@ -43,8 +42,8 @@ export async function Footer() {
                 <span>Kyiv, Ukraine</span>
               </div>
             </div>
-          </Col>
-          <Col xs={24} md={8}>
+          </div>
+          <div>
             <h4 className="text-lg font-bold mb-3">{t("followUs")}</h4>
             <SocialIcons />
             <div className="mt-4 space-y-1">
@@ -61,8 +60,8 @@ export async function Footer() {
                 {t("terms")}
               </a>
             </div>
-          </Col>
-        </Row>
+          </div>
+        </div>
         <div className="mt-8 pt-6 border-t border-white/10 text-center text-gray-400 text-sm">
           <p>{t("copyright")}</p>
         </div>

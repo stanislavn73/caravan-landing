@@ -42,6 +42,22 @@ body {
   font-family: var(--font-body);
 }
 
+/* All interactive elements get pointer cursor */
+button, [role="button"], a {
+  cursor: pointer;
+}
+
+/* Reset browser chrome on buttons — use @layer so Tailwind utilities can override */
+@layer base {
+  button {
+    background: transparent;
+    border: none;
+    padding: 0;
+    font: inherit;
+    color: inherit;
+  }
+}
+
 /* Prevent Safari auto-zoom on input focus (triggers below 16px) */
 @media screen and (max-width: 767px) {
   input, select, textarea {
@@ -49,23 +65,6 @@ body {
   }
 }
 
-.ant-btn-primary {
-  box-shadow: 0 4px 12px rgba(255, 90, 47, 0.3);
-}
-
-.ant-btn-primary:hover {
-  box-shadow: 0 6px 16px rgba(255, 90, 47, 0.4);
-}
-
-.ant-checkbox-checked .ant-checkbox-inner {
-  background-color: #FF5A2F !important;
-  border-color: #FF5A2F !important;
-}
-
-.ant-checkbox-wrapper:hover .ant-checkbox-inner,
-.ant-checkbox:hover .ant-checkbox-inner {
-  border-color: #FF5A2F !important;
-}
 
 /* Focus-visible styles for keyboard navigation */
 :focus-visible {

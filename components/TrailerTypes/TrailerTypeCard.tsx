@@ -1,9 +1,9 @@
 "use client";
 
 import Image from "next/image";
-import { Card, Button } from "antd";
 import { CheckOutlined } from "@ant-design/icons";
 import { useConfigurator } from "@/components/ConfiguratorContext";
+import { Button } from "@/components/ui/Button";
 
 interface TrailerTypeCardProps {
   type: "wide" | "offroad";
@@ -28,15 +28,13 @@ export function TrailerTypeCard({
   const isSelected = selectedTrailerType === type;
 
   return (
-    <Card
-      hoverable
-      className={`h-full transition-all duration-300 overflow-hidden ${
+    <div
+      className={`h-full rounded-lg overflow-hidden transition-all duration-300 bg-white ${
         isSelected ? "shadow-2xl" : "hover:shadow-xl"
       }`}
       style={{
         border: isSelected ? "3px solid #FF5A2F" : "1px solid #e5e7eb",
       }}
-      styles={{ body: { padding: 0 } }}
     >
       <div
         className="relative bg-white flex items-center justify-center px-6"
@@ -56,10 +54,7 @@ export function TrailerTypeCard({
         </div>
       </div>
       <div className="px-6 pb-6 pt-4">
-        <h3
-          className="text-2xl font-bold mb-4 text-center"
-          style={{ color: "#000000" }}
-        >
+        <h3 className="text-2xl font-bold mb-4 text-center text-black">
           {name}
         </h3>
         <div className="mb-6 space-y-2 text-center">
@@ -70,16 +65,10 @@ export function TrailerTypeCard({
           ))}
         </div>
         <Button
-          type={isSelected ? "primary" : "default"}
-          size="large"
+          variant={isSelected ? "primary" : "default"}
+          size="md"
           block
           onClick={() => selectTrailerType(type)}
-          className="h-11 font-semibold transition-all duration-300"
-          style={{
-            backgroundColor: isSelected ? "#FF5A2F" : "#ffffff",
-            borderColor: isSelected ? "#FF5A2F" : "#d9d9d9",
-            color: isSelected ? "#ffffff" : "#000000",
-          }}
         >
           {isSelected ? (
             <>
@@ -90,6 +79,6 @@ export function TrailerTypeCard({
           )}
         </Button>
       </div>
-    </Card>
+    </div>
   );
 }

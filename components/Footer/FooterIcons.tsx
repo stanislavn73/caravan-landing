@@ -1,26 +1,22 @@
-"use client";
-
 import {
+  PhoneOutlined,
+  MailOutlined,
+  EnvironmentOutlined,
   FacebookOutlined,
   InstagramOutlined,
   YoutubeOutlined,
-  MailOutlined,
-  PhoneOutlined,
-  EnvironmentOutlined,
 } from "@ant-design/icons";
 
-export function PhoneIcon() {
+export function FooterPhoneIcon() {
   return <PhoneOutlined className="mr-2" style={{ color: "#FF5A2F" }} />;
 }
 
-export function MailIcon() {
+export function FooterMailIcon() {
   return <MailOutlined className="mr-2" style={{ color: "#FF5A2F" }} />;
 }
 
-export function LocationIcon() {
-  return (
-    <EnvironmentOutlined className="mr-2 mt-1" style={{ color: "#FF5A2F" }} />
-  );
+export function FooterLocationIcon() {
+  return <EnvironmentOutlined className="mr-2 mt-1" style={{ color: "#FF5A2F" }} />;
 }
 
 export function SocialIcons() {
