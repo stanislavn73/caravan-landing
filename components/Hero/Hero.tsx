@@ -46,26 +46,15 @@ export async function Hero() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.5, duration: 0.8 }}
           >
-            <h1 className="mb-8">
-              <span
-                className="block text-white font-bold tracking-tighter leading-[0.85] mb-3"
-                style={{
-                  fontSize: "clamp(4rem, 15vw, 12rem)",
-                  textShadow: "0 4px 20px rgba(0, 0, 0, 0.5)",
-                }}
-              >
-                RESPO
-              </span>
-              <span
-                className="block font-bold tracking-tighter leading-[0.85]"
-                style={{
-                  fontSize: "clamp(4rem, 15vw, 12rem)",
-                  color: "#FF5A2F",
-                  textShadow: "0 4px 20px rgba(0, 0, 0, 0.5)",
-                }}
-              >
-                CARAVAN
-              </span>
+            <h1
+              className="mb-8 font-bold tracking-tighter leading-[0.85]"
+              style={{
+                fontSize: "clamp(4rem, 15vw, 12rem)",
+                color: "var(--respo-orange-60)",
+                textShadow: "0 4px 20px rgba(0, 0, 0, 0.5)",
+              }}
+            >
+              RESPO
             </h1>
             <motion.p
               initial={{ opacity: 0 }}

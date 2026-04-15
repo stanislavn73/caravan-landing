@@ -1,10 +1,60 @@
 @import "tailwindcss";
 
+/* Berthold Akzidenz Grotesk */
+@font-face {
+  font-family: "BertholdAkzidenzGrotesk";
+  src:
+    url("/fonts/AkzidenzGrotesk-Regular.otf") format("opentype"),
+    url("/fonts/AkzidenzGroteskBE-Regular.otf") format("opentype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "BertholdAkzidenzGrotesk";
+  src:
+    url("/fonts/AkzidenzGrotesk-Light.otf") format("opentype"),
+    url("/fonts/AkzidenzGroteskBE-Light.otf") format("opentype");
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "BertholdAkzidenzGrotesk";
+  src: url("/fonts/AkzidenzGrotesk-Italic.otf") format("opentype");
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "BertholdAkzidenzGrotesk";
+  src:
+    url("/fonts/AkzidenzGrotesk-Bold.otf") format("opentype"),
+    url("/fonts/AkzidenzGroteskBE-Bold.otf") format("opentype");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "BertholdAkzidenzGrotesk";
+  src:
+    url("/fonts/AkzidenzGrotesk-Super.otf") format("opentype"),
+    url("/fonts/AkzidenzGroteskBE-Super.otf") format("opentype");
+  font-weight: 900;
+  font-style: normal;
+  font-display: swap;
+}
+
 :root {
   --background: #ffffff;
   --foreground: #000000;
-  --font-body: Arial, Helvetica, sans-serif;
+  --font-body: "BertholdAkzidenzGrotesk", Arial, Helvetica, sans-serif;
   --respo-orange: #FF5A2F;
+  --respo-orange-60: rgba(255, 90, 47, 0.6);
   --respo-black: #000000;
   --respo-white: #ffffff;
 }

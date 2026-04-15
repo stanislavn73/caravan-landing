@@ -54,15 +54,17 @@ export function TrailerTypeCard({
         </div>
       </div>
       <div className="px-6 pb-6 pt-4">
-        <h3 className="text-2xl font-bold mb-4 text-center text-black">
-          {name}
-        </h3>
-        <div className="mb-6 space-y-2 text-center">
-          {specs.map((spec, idx) => (
-            <div key={idx} className="flex items-center justify-center">
-              <span className="text-gray-700 text-sm">{spec}</span>
+        <div className="flex justify-center">
+          <div className="w-fit max-w-full text-center">
+            <h3 className="text-2xl font-bold mb-4 text-black">{name}</h3>
+            <div className="mb-6 space-y-2 text-left">
+              {specs.map((spec, idx) => (
+                <div key={idx} className="text-gray-700 text-sm">
+                  {spec}
+                </div>
+              ))}
             </div>
-          ))}
+          </div>
         </div>
         <Button
           variant={isSelected ? "primary" : "default"}
