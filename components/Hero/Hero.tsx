@@ -1,43 +1,14 @@
 import { getTranslations } from "next-intl/server";
 import * as motion from "motion/react-client";
-import { HeroCarousel } from "./HeroCarousel";
+import { HeroVideoBackground } from "./HeroVideoBackground";
 import { HeroCTAButton } from "./HeroCTAButton";
-import { blurDataURLs } from "@/lib/blur-data-urls";
-
-const heroImages = [
-  {
-    src: "/images/hero-1.webp",
-    alt: "Camping trailer in nature",
-    blurDataURL: blurDataURLs["hero-1"],
-  },
-  {
-    src: "/images/hero-2.webp",
-    alt: "Camper van landscape",
-    blurDataURL: blurDataURLs["hero-2"],
-  },
-  {
-    src: "/images/hero-3.webp",
-    alt: "Caravan travel",
-    blurDataURL: blurDataURLs["hero-3"],
-  },
-  {
-    src: "/images/hero-4.webp",
-    alt: "Camping trailer",
-    blurDataURL: blurDataURLs["hero-4"],
-  },
-  {
-    src: "/images/hero-5.webp",
-    alt: "Outdoor caravan",
-    blurDataURL: blurDataURLs["hero-5"],
-  },
-];
 
 export async function Hero() {
   const t = await getTranslations("hero");
 
   return (
     <section id="hero" className="relative h-screen w-full overflow-hidden">
-      <HeroCarousel images={heroImages} />
+      <HeroVideoBackground />
 
       <div className="relative z-10 h-full flex items-center justify-center">
         <div className="text-center px-4 max-w-6xl mx-auto">

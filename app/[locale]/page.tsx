@@ -103,9 +103,9 @@ export default async function Page({ params }: Props) {
             <Navbar />
             <main id="main-content">
             <Hero />
+            <Advantages />
             <InteractiveConfigurator />
             <TechnicalSpecs />
-            <Advantages />
             <PriceCalculator />
             <CTASection />
             </main>
