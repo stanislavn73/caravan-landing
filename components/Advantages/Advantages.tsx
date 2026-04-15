@@ -35,10 +35,7 @@ export async function Advantages() {
                 className="h-full rounded-lg border border-gray-200 bg-white hover:shadow-lg transition-all duration-300 cursor-pointer"
               >
                 <div className="p-6 text-center flex flex-col h-full">
-                  <div
-                    className="w-16 h-16 mx-auto mb-4 rounded-full flex items-center justify-center"
-                    style={{ backgroundColor: "#FF5A2F", color: "#ffffff" }}
-                  >
+                  <div className="mx-auto mb-4 flex h-24 w-24 shrink-0 items-center justify-center">
                     <AdvantageIcon index={index} />
                   </div>
                   <h3 className="text-lg font-bold mb-2 text-black">
